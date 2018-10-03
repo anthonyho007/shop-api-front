@@ -5,8 +5,8 @@ const path = require('path');
 
 nconf.argv().env([
     'PORT',
-    'BACKEND_HOST',
-    'BACKEND_PORT'
+    'BE_SRV_SERVICE_HOST',
+    'BE_SRV_SERVICE_PORT'
 ]).file({
     file: path.join(__dirname, 'config.json')
 }).defaults({

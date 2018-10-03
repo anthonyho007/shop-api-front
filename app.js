@@ -3,12 +3,13 @@ var app = express();
 var axios = require('axios');
 var config = require('./config');
 var url = require('url');
+var bodyParser = require('body-parser');
+var jsonParser = bodyParser.json();
 
 // configure express server
-app.configure(function() {
-    app.use(express.bodyParser());
-    app.set('view engine', 'ejs');
-});
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
+app.set('view engine', 'ejs');
 
 // setup routes and views
 
@@ -16,8 +17,7 @@ app.get('/', function(req, res){
     res.render('main.ejs');
 });
 
-app.post('/signin', function(req, res) {
-    var path = process.env.BACKEND_HOST +":" + process.env.BACKEND_PORT;
+app.post('/signin', jsonParser,function(req, res) {
     var path = "http://" + config.get('BE_SRV_SERVICE_HOST') + ":" + config.get('BE_SRV_SERVICE_PORT');
     axios({ method: "POST", "url": path + "/signin",
         "data": {
@@ -59,7 +59,7 @@ app.get('/signout', function(req, res){
 
 // listen
 const server = app.listen(config.get('PORT'), ()=> {
-    const address = server.address();
+    const address = server.address().port;
     console.log('Listening on ' + address);
 })
 
