@@ -18,7 +18,7 @@ app.get('/', function(req, res){
 });
 
 app.post('/signin', jsonParser,function(req, res) {
-    var path = "http://" + config.get('BE_SRV_SERVICE_HOST') + ":" + config.get('BE_SRV_SERVICE_PORT');
+    var path = "http://" + config.get('BACKEND_SRV_SERVICE_HOST') + ":" + config.get('BACKEND_SRV_SERVICE_PORT');
     axios({ method: "POST", "url": path + "/signin",
         "data": {
             "name": req.body.name,
