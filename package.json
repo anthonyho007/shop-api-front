@@ -1,11 +1,13 @@
 {
     "name": "front",
     "version": "1.0.0",
-    "description": "",
+    "description": "A simple shop front",
+    "repository": "https://github.com/anthonyho007/shop-api-front",
     "main": "app.js",
     "scripts": {
         "start": "node app.js"
     },
+    "license": "Apache-2.0",
     "dependencies": {
         "axios": "^0.18.0",
         "body-parser": "^1.18.3",
