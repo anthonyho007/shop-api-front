@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: shopfront-srv
+  labels:
+    type: shopfront-type
+spec:
+  type: LoadBalancer
+  ports:
+  - name: shop-front
+    port: 80
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    type: shopfront-type

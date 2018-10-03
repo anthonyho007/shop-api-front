@@ -1,0 +1,38 @@
+---
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: shopfront
+  labels:
+    type: shopfront-type
+spec:
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        type: shopfront-type
+    spec:
+      containers:
+      - name: shopfront
+        # Replace [GCLOUD_PROJECT] with your project ID or use `make template`.
+        image: gcr.io/ ${PROJECT_ID}/shopfront
+        # This setting makes nodes pull the docker image every time before
+        # starting the pod. This is useful when debugging, but should be turned
+        # off in production.
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+        env:
+          - name: PROJECT_ID
+            value:  ${PROJECT_ID}
+          - name: PORT
+            value: "8080"
+          - name: POD_NAME
+            valueFrom:
+             fieldRef:
+                fieldPath: metadata.name
+          - name: POD_NAMESPACE
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.namespace
